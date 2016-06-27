@@ -4,7 +4,8 @@
 .mtj.tmp/
 
 # Package Files #
-*.jar
+*.jar # thi lines ignores all the jar files
+!lib/mysql-connector-java-5.1.39.jar # but we want only this jar file to be included
 *.war
 *.ear
 
