@@ -68,7 +68,7 @@ public class utils {
 		return index;
 	}
 
-	public static String createConnectionString(int type, String url, String port, String username, String password) {
+	public static String createConnectionString(int type, String url, String port) {
 		String connUrl = dbURL[type] + url + ":" + port;
 		return connUrl;
 	}
@@ -76,7 +76,20 @@ public class utils {
 	public static Connection getConnection(int type, String url, String port, String username, String password) {
 		try {
 			Class.forName(strDriver[type]);
-			String connUrl = createConnectionString(type, url, port, username, password);
+			String connUrl = createConnectionString(type, url, port);
+			Connection conn = DriverManager.getConnection(connUrl, username, password);
+			if (conn != null) {
+				return conn;
+			} else
+				return null;
+		} catch (Exception e) {
+			return null;
+		}
+	}
+	public static Connection getConnectionWithDB(int type, String url, String port, String db ,String username, String password) {
+		try {
+			Class.forName(strDriver[type]);
+			String connUrl = dbURL[type] + url + ":" + port +"/"+db;
 			Connection conn = DriverManager.getConnection(connUrl, username, password);
 			if (conn != null) {
 				return conn;
@@ -95,6 +108,54 @@ public class utils {
 		String srcDBPassword = Configuration.getAttribute(PropertiesName.srcPassword);
 		Connection conn = getConnection(index, srcDBUrl, srcDBPort, srcDBUserName, srcDBPassword);
 		return conn;
+	}
+	public static Connection getSourceConnectionWithDB() {
+		int index = utils.getDriverClassIndex(Configuration.getAttribute(PropertiesName.srcDriver));
+		String srcDBUrl = Configuration.getAttribute(PropertiesName.srcUrl);
+		String srcDBPort = Configuration.getAttribute(PropertiesName.srcPort);
+		String srcDBUserName = Configuration.getAttribute(PropertiesName.srcUser);
+		String srcDBPassword = Configuration.getAttribute(PropertiesName.srcPassword);
+		String srcDB = Configuration.getAttribute(PropertiesName.srcDB);
+		Connection conn = getConnectionWithDB(index, srcDBUrl, srcDBPort, srcDB,srcDBUserName, srcDBPassword);
+		return conn;
+	}
+	
+	public static Connection getDestinationConnection() {
+		int index = utils.getDriverClassIndex(Configuration.getAttribute(PropertiesName.destDriver));
+		String destDBUrl = Configuration.getAttribute(PropertiesName.destUrl);
+		String destDBPort = Configuration.getAttribute(PropertiesName.destPort);
+		String destDBUserName = Configuration.getAttribute(PropertiesName.destUser);
+		String destDBPassword = Configuration.getAttribute(PropertiesName.destPassword);
+		String destDB = Configuration.getAttribute(PropertiesName.destDB);
+		Connection conn = getConnectionWithDB(index, destDBUrl, destDBPort,destDB, destDBUserName, destDBPassword);
+		return conn;
+	}
+	
+	public static boolean checkIfBothDbAreSame() {
+		int srcindex = utils.getDriverClassIndex(Configuration.getAttribute(PropertiesName.srcDriver));
+		String srcDBUrl = Configuration.getAttribute(PropertiesName.srcUrl);
+		String srcDBPort = Configuration.getAttribute(PropertiesName.srcPort);
+		String srcDBUserName = Configuration.getAttribute(PropertiesName.srcUser);
+		String srcDBPassword = Configuration.getAttribute(PropertiesName.srcPassword);
+		String srcDB= Configuration.getAttribute(PropertiesName.srcDB);
+		
+		int destindex = utils.getDriverClassIndex(Configuration.getAttribute(PropertiesName.destDriver));
+		String destDBUrl = Configuration.getAttribute(PropertiesName.destUrl);
+		String destDBPort = Configuration.getAttribute(PropertiesName.destPort);
+		String destDBUserName = Configuration.getAttribute(PropertiesName.destUser);
+		String destDBPassword = Configuration.getAttribute(PropertiesName.destPassword);
+		String destDB = Configuration.getAttribute(PropertiesName.destDB);
+		
+		if( srcindex == destindex && 
+				srcDBUrl.equals(destDBUrl) &&
+				srcDBPort.equals(destDBPort) &&
+				srcDBUserName.equals(destDBUserName) &&
+				srcDBPassword.equals(destDBPassword) &&
+				srcDB.equals(destDB))
+			
+			return true;
+		else
+			return false;	
 	}
 
 	public static ArrayList[][] listTable(Connection conn, String schema, String tableName) {
@@ -168,6 +229,12 @@ public class utils {
 			e.printStackTrace();
 		}
 		return data;
+	}
+	
+	public static void createTable(ArrayList<String> dataToLoad){
+		Operations op = new Operations();
+		op.init();
+		op.CreateTables(dataToLoad);
 	}
 
 }

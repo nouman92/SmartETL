@@ -10,6 +10,7 @@ import java.awt.Color;
 import javax.swing.JDesktopPane;
 
 import smartEtl.config.Configuration;
+import smartEtl.config.PropertiesName;
 
 /**
  *
@@ -34,7 +35,7 @@ public class DesktopPane extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-    	
+
     	desktopPane = new JDesktopPane();
     	desktopPane.setBackground(Color.green);
     	this.setContentPane(desktopPane);
@@ -44,6 +45,7 @@ public class DesktopPane extends javax.swing.JFrame {
         srcConnectionMenue = new javax.swing.JMenuItem();
         destConnectionMenue = new javax.swing.JMenuItem();
         extractMenue = new javax.swing.JMenuItem();
+        LoadDataMenue = new javax.swing.JMenuItem();
         exitMenue = new javax.swing.JMenuItem();
         EditMenue = new javax.swing.JMenu();
         aboutMenue = new javax.swing.JMenu();
@@ -76,6 +78,14 @@ public class DesktopPane extends javax.swing.JFrame {
             }
         });
         fileMenue.add(extractMenue);
+
+        LoadDataMenue.setText("Load Data");
+        LoadDataMenue.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LoadDataMenueActionPerformed(evt);
+            }
+        });
+        fileMenue.add(LoadDataMenue);
 
         exitMenue.setText("Exit");
         exitMenue.addActionListener(new java.awt.event.ActionListener() {
@@ -161,6 +171,14 @@ public class DesktopPane extends javax.swing.JFrame {
         desktopPane.add(tables);
     }//GEN-LAST:event_extractMenueActionPerformed
 
+    private void LoadDataMenueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoadDataMenueActionPerformed
+    	LoadDataDestination tables = new LoadDataDestination();
+    	tables.populateData();
+    	tables.setLocation(100, 100);
+    	tables.setVisible(true);
+        desktopPane.add(tables);
+    }//GEN-LAST:event_LoadDataMenueActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -168,6 +186,7 @@ public class DesktopPane extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu EditMenue;
+    private javax.swing.JMenuItem LoadDataMenue;
     private javax.swing.JMenu aboutMenue;
     private javax.swing.JMenuItem aboutetl;
     private javax.swing.JMenuItem destConnectionMenue;

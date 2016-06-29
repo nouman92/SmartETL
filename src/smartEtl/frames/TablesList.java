@@ -129,7 +129,7 @@ public class TablesList extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_tablesListMouseReleased
 
-    public JPopupMenu showPopUp(String table){
+    public JPopupMenu showPopUp(final String table){
     	JPopupMenu popup = new JPopupMenu();
     	JMenuItem item = new JMenuItem("View Data");
     	item.addActionListener(new java.awt.event.ActionListener() {
