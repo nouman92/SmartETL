@@ -11,12 +11,13 @@ import java.util.Properties;
 public class Configuration {
 
 	private static Properties projectProperties ;
+	private static String FileName; ;
 	
 	public static void init(String ProjectName){
-		
+		FileName = ProjectName +".properties";
 		projectProperties= new Properties();
 		projectProperties.put(PropertiesName.Project.toString(), ProjectName);
-		File configFile = new File("config.properties");
+		File configFile = new File(FileName);
 		if(configFile.exists())
 		{
 			FileReader reader = null;
@@ -34,24 +35,30 @@ public class Configuration {
 		
 	}
 	
-	public static void init(String fileName , String project){
-		
-		File configFile = new File(fileName);
-		FileReader reader = null;
-		try {
-			reader = new FileReader(configFile);
-		} catch (FileNotFoundException e) {
-		}
-		projectProperties= new Properties();
-		try {
-			if( reader != null )
-				projectProperties.load(reader);
-		} catch (IOException e) {
-		}
-		try {
-			if( reader != null )
-				reader.close();
-		} catch (IOException e) {
+	public static Boolean init(File configFile){
+		if(configFile.exists() && !configFile.isDirectory() && ( configFile.getName().contains("properties") || configFile.getName().contains("Properties")) )
+		{
+			FileReader reader = null;
+			
+			try {
+				reader = new FileReader(configFile);
+			} catch (FileNotFoundException e) {
+			}
+			FileName = configFile.getAbsolutePath();
+			projectProperties= new Properties();
+			try {
+				if( reader != null )
+					projectProperties.load(reader);
+			} catch (IOException e) {
+			}
+			try {
+				if( reader != null )
+					reader.close();
+			} catch (IOException e) {
+			}
+			return true;
+		}else{
+			return false;
 		}
 		
 	}
@@ -72,7 +79,7 @@ public class Configuration {
 	}
 	
 	public static void saveConfig(){
-		File configFile = new File("config.properties");
+		File configFile = new File(FileName);
 		try {
 			if(!configFile.exists())
 				configFile.createNewFile();

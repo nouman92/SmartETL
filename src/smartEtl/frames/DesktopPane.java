@@ -36,10 +36,6 @@ public class DesktopPane extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-    	desktopPane = new JDesktopPane();
-    	desktopPane.setBackground(Color.green);
-    	this.setContentPane(desktopPane);
-
         mainMenue = new javax.swing.JMenuBar();
         fileMenue = new javax.swing.JMenu();
         srcConnectionMenue = new javax.swing.JMenuItem();
@@ -47,7 +43,6 @@ public class DesktopPane extends javax.swing.JFrame {
         extractMenue = new javax.swing.JMenuItem();
         LoadDataMenue = new javax.swing.JMenuItem();
         exitMenue = new javax.swing.JMenuItem();
-        EditMenue = new javax.swing.JMenu();
         aboutMenue = new javax.swing.JMenu();
         aboutetl = new javax.swing.JMenuItem();
 
@@ -96,9 +91,6 @@ public class DesktopPane extends javax.swing.JFrame {
         fileMenue.add(exitMenue);
 
         mainMenue.add(fileMenue);
-
-        EditMenue.setText("Edit");
-        mainMenue.add(EditMenue);
 
         aboutMenue.setText("About");
         aboutMenue.addActionListener(new java.awt.event.ActionListener() {
@@ -185,7 +177,6 @@ public class DesktopPane extends javax.swing.JFrame {
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu EditMenue;
     private javax.swing.JMenuItem LoadDataMenue;
     private javax.swing.JMenu aboutMenue;
     private javax.swing.JMenuItem aboutetl;

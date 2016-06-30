@@ -13,6 +13,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import smartEtl.config.Configuration;
 import smartEtl.config.PropertiesName;
 
@@ -205,7 +207,12 @@ public class utils {
 	public static ArrayList<String> getTables(Connection conn, String schema) {
 		Statement statement = null;
 		try {
-			statement = conn.createStatement();
+			if(conn != null)
+				statement = conn.createStatement();
+			else{
+				JOptionPane.showMessageDialog(null, "Please Enter Configurations");
+				return null;
+			}
 		} catch (SQLException e2) {
 		}
 		ArrayList<String> data = new ArrayList<String>();
@@ -231,10 +238,9 @@ public class utils {
 		return data;
 	}
 	
-	public static void createTable(ArrayList<String> dataToLoad){
-		Operations op = new Operations();
-		op.init();
-		op.CreateTables(dataToLoad);
+	public static void LoadData(ArrayList<String> dataToLoad){
+		Runnable op = new Operations(dataToLoad);
+		new Thread(op).start();
 	}
 
 }

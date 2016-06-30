@@ -5,8 +5,12 @@
  */
 package smartEtl.frames;
 
+import java.io.File;
+
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import smartEtl.config.Configuration;
 
@@ -37,6 +41,8 @@ public class mainWindow extends javax.swing.JFrame {
         ApplicationTitle = new javax.swing.JLabel();
         projectName = new javax.swing.JTextField();
         projectNameLable = new javax.swing.JLabel();
+        BrowseButton = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Smart ETL Tool");
@@ -45,9 +51,7 @@ public class mainWindow extends javax.swing.JFrame {
         setBounds(new java.awt.Rectangle(200, 200, 400, 200));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setLocation(new java.awt.Point(400, 200));
-        setMaximumSize(new java.awt.Dimension(400, 200));
         setMinimumSize(new java.awt.Dimension(400, 200));
-        setPreferredSize(new java.awt.Dimension(400, 200));
         setSize(new java.awt.Dimension(400, 200));
         getContentPane().setLayout(null);
         getContentPane().add(jSeparator1);
@@ -63,26 +67,46 @@ public class mainWindow extends javax.swing.JFrame {
             }
         });
         getContentPane().add(startButton);
-        startButton.setBounds(260, 100, 120, 30);
+        startButton.setBounds(270, 110, 120, 30);
 
         ApplicationTitle.setFont(new java.awt.Font("Serif", 1, 18)); // NOI18N
         ApplicationTitle.setText("Smart ETL Tool");
         getContentPane().add(ApplicationTitle);
         ApplicationTitle.setBounds(120, 0, 170, 50);
         getContentPane().add(projectName);
-        projectName.setBounds(70, 60, 310, 25);
+        projectName.setBounds(70, 60, 230, 25);
 
         projectNameLable.setText("Project");
         getContentPane().add(projectNameLable);
         projectNameLable.setBounds(10, 60, 44, 20);
+
+        BrowseButton.setText("Browse");
+        BrowseButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BrowseButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(BrowseButton);
+        BrowseButton.setBounds(310, 60, 80, 27);
+
+        jLabel1.setText("Choos Project file Or Enter project name To Create Project");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(10, 90, 390, 15);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void startButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startButtonActionPerformed
     	String project = this.projectName.getText();
-    	if( !project.equals(""))
+    	if( projFile == null && !project.equals(""))
          	Configuration.init(project);
+    	 else if( projFile != null )
+    	 {
+    		 if(!Configuration.init(projFile)){
+    			 JOptionPane.showMessageDialog(this, "Invalid File");
+        		 return;
+    		 }
+    	 }
     	 else{
     		 JOptionPane.showMessageDialog(this, "Please Enter Project Name");
     		 return;
@@ -97,11 +121,29 @@ public class mainWindow extends javax.swing.JFrame {
        
     }//GEN-LAST:event_startButtonActionPerformed
 
+    private void BrowseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BrowseButtonActionPerformed
+    	jFileChooser1 = new JFileChooser();
+    	FileNameExtensionFilter filter = new FileNameExtensionFilter("ETL Tool Project File", "Properties", "properties");
+    	jFileChooser1.setFileFilter(filter);
+    	int returnVal = jFileChooser1.showOpenDialog(this);
+
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            projFile = jFileChooser1.getSelectedFile();
+            jFileChooser1.setDialogTitle("Choose Project File");
+            this.projectName.setText(projFile.getAbsolutePath());
+        } else {
+        }
+    }//GEN-LAST:event_BrowseButtonActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel ApplicationTitle;
+    private javax.swing.JButton BrowseButton;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField projectName;
     private javax.swing.JLabel projectNameLable;
     private javax.swing.JButton startButton;
+    private File projFile;
+    private JFileChooser jFileChooser1 ;
     // End of variables declaration//GEN-END:variables
 }
