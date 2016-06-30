@@ -12,7 +12,7 @@ import smartEtl.core.utils;
 
 /**
  *
- * @author nouman
+ * @author furqan
  */
 public class sourceDataJtable extends javax.swing.JInternalFrame {
 

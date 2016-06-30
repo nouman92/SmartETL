@@ -33,6 +33,14 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="extractMenueActionPerformed"/>
               </Events>
             </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="transformMenue">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Transform"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="transformMenueActionPerformed"/>
+              </Events>
+            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="LoadDataMenue">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Load Data"/>
@@ -50,11 +58,6 @@
               </Events>
             </MenuItem>
           </SubComponents>
-        </Menu>
-        <Menu class="javax.swing.JMenu" name="EditMenue">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Edit"/>
-          </Properties>
         </Menu>
         <Menu class="javax.swing.JMenu" name="aboutMenue">
           <Properties>

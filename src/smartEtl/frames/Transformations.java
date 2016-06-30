@@ -7,7 +7,7 @@ package smartEtl.frames;
 
 /**
  *
- * @author nouman
+ * @author furqan
  */
 public class Transformations extends javax.swing.JInternalFrame {
 

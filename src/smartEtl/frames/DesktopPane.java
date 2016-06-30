@@ -8,9 +8,10 @@ package smartEtl.frames;
 import java.awt.Color;
 
 import javax.swing.JDesktopPane;
+import javax.swing.JOptionPane;
 
 import smartEtl.config.Configuration;
-import smartEtl.config.PropertiesName;
+import smartEtl.core.utils;
 
 /**
  *
@@ -36,11 +37,16 @@ public class DesktopPane extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+    	desktopPane = new JDesktopPane();
+    	desktopPane.setBackground(Color.green);
+    	this.setContentPane(desktopPane);
+    	
         mainMenue = new javax.swing.JMenuBar();
         fileMenue = new javax.swing.JMenu();
         srcConnectionMenue = new javax.swing.JMenuItem();
         destConnectionMenue = new javax.swing.JMenuItem();
         extractMenue = new javax.swing.JMenuItem();
+        transformMenue = new javax.swing.JMenuItem();
         LoadDataMenue = new javax.swing.JMenuItem();
         exitMenue = new javax.swing.JMenuItem();
         aboutMenue = new javax.swing.JMenu();
@@ -73,6 +79,14 @@ public class DesktopPane extends javax.swing.JFrame {
             }
         });
         fileMenue.add(extractMenue);
+
+        transformMenue.setText("Transform");
+        transformMenue.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                transformMenueActionPerformed(evt);
+            }
+        });
+        fileMenue.add(transformMenue);
 
         LoadDataMenue.setText("Load Data");
         LoadDataMenue.addActionListener(new java.awt.event.ActionListener() {
@@ -157,19 +171,33 @@ public class DesktopPane extends javax.swing.JFrame {
 
     private void extractMenueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_extractMenueActionPerformed
     	
-    	TablesList tables = new TablesList();
-    	tables.setLocation(100, 100);
-    	tables.setVisible(true);
-        desktopPane.add(tables);
+    	if( utils.getSourceConnection() != null){
+	    	TablesList tables = new TablesList();
+	    	tables.setLocation(100, 100);
+	    	tables.setVisible(true);
+	        desktopPane.add(tables);
+    	}
+    	else{
+    		JOptionPane.showMessageDialog(null, "Please Enter Configurations First");
+    	}
     }//GEN-LAST:event_extractMenueActionPerformed
 
     private void LoadDataMenueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoadDataMenueActionPerformed
-    	LoadDataDestination tables = new LoadDataDestination();
-    	tables.populateData();
-    	tables.setLocation(100, 100);
-    	tables.setVisible(true);
-        desktopPane.add(tables);
+    	if( utils.getDestinationConnection() != null)
+    	{
+    		LoadDataDestination tables = new LoadDataDestination();
+	    	tables.populateData();
+	    	tables.setLocation(100, 100);
+	    	tables.setVisible(true);
+	        desktopPane.add(tables);
+    	}else{
+    		JOptionPane.showMessageDialog(null, "Please Enter Configurations First");
+    	}
     }//GEN-LAST:event_LoadDataMenueActionPerformed
+
+    private void transformMenueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transformMenueActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_transformMenueActionPerformed
 
     /**
      * @param args the command line arguments
@@ -186,5 +214,6 @@ public class DesktopPane extends javax.swing.JFrame {
     private javax.swing.JMenu fileMenue;
     private javax.swing.JMenuBar mainMenue;
     private javax.swing.JMenuItem srcConnectionMenue;
+    private javax.swing.JMenuItem transformMenue;
     // End of variables declaration//GEN-END:variables
 }

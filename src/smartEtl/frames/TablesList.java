@@ -24,7 +24,7 @@ import smartEtl.core.utils;
 
 /**
  *
- * @author nouman
+ * @author furqan
  */
 public class TablesList extends javax.swing.JInternalFrame {
 

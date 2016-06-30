@@ -5,7 +5,6 @@
  */
 package smartEtl.frames;
 
-import java.awt.Color;
 import java.sql.Connection;
 import java.util.ArrayList;
 
@@ -18,7 +17,7 @@ import smartEtl.core.utils;
 
 /**
  *
- * @author nouman
+ * @author furqan
  */
 public class LoadDataDestination extends javax.swing.JInternalFrame {
 
@@ -83,6 +82,27 @@ public class LoadDataDestination extends javax.swing.JInternalFrame {
                 loadDataButtonActionPerformed(evt);
             }
         });
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(loadDataButton)
+                .addContainerGap())
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 12, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(loadDataButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -116,7 +136,6 @@ public class LoadDataDestination extends javax.swing.JInternalFrame {
     		}
     	}
     }//GEN-LAST:event_loadDataButtonActionPerformed
-
 
     private javax.swing.JTable dataToLoadTable;
     private javax.swing.JScrollPane jScrollPane1;
