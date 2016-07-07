@@ -68,16 +68,19 @@ public class utils {
 		return index;
 	}
 
-	public static String createConnectionString(int type, String url, String port) {
-		String connUrl = dbURL[type] + url + ":" + port;
-		return connUrl;
-	}
-
-	public static Connection getConnection(int type, String url, String port, String username, String password) {
+	public static Connection getConnection(String source) {
+		int index = utils.getDriverClassIndex(Configuration.getAttribute(PropertiesName.getProperty(source+"Driver")));
+		String DBUrl = Configuration.getAttribute(PropertiesName.getProperty(source+"Url"));
+		String DBPort = Configuration.getAttribute(PropertiesName.getProperty(source+"Port"));
+		String DBUserName = Configuration.getAttribute(PropertiesName.getProperty(source+"User"));
+		String DBPassword = Configuration.getAttribute(PropertiesName.getProperty(source+"Password"));
+		String DB = Configuration.getAttribute(PropertiesName.getProperty(source+"DB"));
+		
+		Connection conn = null;
 		try {
-			Class.forName(strDriver[type]);
-			String connUrl = createConnectionString(type, url, port);
-			Connection conn = DriverManager.getConnection(connUrl, username, password);
+			Class.forName(strDriver[index]);
+			String connUrl = dbURL[index] + DBUrl + ":" + DBPort +"/"+DB;
+			conn = DriverManager.getConnection(connUrl, DBUserName, DBPassword);
 			if (conn != null) {
 				return conn;
 			} else
@@ -85,50 +88,6 @@ public class utils {
 		} catch (Exception e) {
 			return null;
 		}
-	}
-	public static Connection getConnectionWithDB(int type, String url, String port, String db ,String username, String password) {
-		try {
-			Class.forName(strDriver[type]);
-			String connUrl = dbURL[type] + url + ":" + port +"/"+db;
-			Connection conn = DriverManager.getConnection(connUrl, username, password);
-			if (conn != null) {
-				return conn;
-			} else
-				return null;
-		} catch (Exception e) {
-			return null;
-		}
-	}
-
-	public static Connection getSourceConnection() {
-		int index = utils.getDriverClassIndex(Configuration.getAttribute(PropertiesName.srcDriver));
-		String srcDBUrl = Configuration.getAttribute(PropertiesName.srcUrl);
-		String srcDBPort = Configuration.getAttribute(PropertiesName.srcPort);
-		String srcDBUserName = Configuration.getAttribute(PropertiesName.srcUser);
-		String srcDBPassword = Configuration.getAttribute(PropertiesName.srcPassword);
-		Connection conn = getConnection(index, srcDBUrl, srcDBPort, srcDBUserName, srcDBPassword);
-		return conn;
-	}
-	public static Connection getSourceConnectionWithDB() {
-		int index = utils.getDriverClassIndex(Configuration.getAttribute(PropertiesName.srcDriver));
-		String srcDBUrl = Configuration.getAttribute(PropertiesName.srcUrl);
-		String srcDBPort = Configuration.getAttribute(PropertiesName.srcPort);
-		String srcDBUserName = Configuration.getAttribute(PropertiesName.srcUser);
-		String srcDBPassword = Configuration.getAttribute(PropertiesName.srcPassword);
-		String srcDB = Configuration.getAttribute(PropertiesName.srcDB);
-		Connection conn = getConnectionWithDB(index, srcDBUrl, srcDBPort, srcDB,srcDBUserName, srcDBPassword);
-		return conn;
-	}
-	
-	public static Connection getDestinationConnection() {
-		int index = utils.getDriverClassIndex(Configuration.getAttribute(PropertiesName.destDriver));
-		String destDBUrl = Configuration.getAttribute(PropertiesName.destUrl);
-		String destDBPort = Configuration.getAttribute(PropertiesName.destPort);
-		String destDBUserName = Configuration.getAttribute(PropertiesName.destUser);
-		String destDBPassword = Configuration.getAttribute(PropertiesName.destPassword);
-		String destDB = Configuration.getAttribute(PropertiesName.destDB);
-		Connection conn = getConnectionWithDB(index, destDBUrl, destDBPort,destDB, destDBUserName, destDBPassword);
-		return conn;
 	}
 	
 	public static boolean checkIfBothDbAreSame() {
@@ -158,7 +117,8 @@ public class utils {
 			return false;	
 	}
 
-	public static ArrayList[][] listTable(Connection conn, String schema, String tableName) {
+	@SuppressWarnings("rawtypes")
+	public static ArrayList[][] listTable(Connection conn,String tableName) {
 		Statement statement = null;
 		try {
 			statement = conn.createStatement();
@@ -167,7 +127,7 @@ public class utils {
 		ResultSet res = null;
 		try {
 			if (null != statement) {
-				String query = "select * from "+schema+"."+tableName+";";
+				String query = "select * from "+tableName+";";
 				res = statement.executeQuery(query);
 			}
 		} catch (SQLException e1) {
@@ -202,7 +162,7 @@ public class utils {
 		return response;
 	}
 
-	public static ArrayList<String> getTables(Connection conn, String schema) {
+	public static ArrayList<String> getTables(Connection conn) {
 		Statement statement = null;
 		try {
 			statement = conn.createStatement();
@@ -212,7 +172,7 @@ public class utils {
 		ResultSet res = null;
 		try {
 			if (null != statement) {
-				String query = "select table_name from information_schema.tables where table_schema=\"" + schema + "\"";
+				String query = "SHOW TABLES";
 				res = statement.executeQuery(query);
 			}
 		} catch (SQLException e1) {
@@ -231,9 +191,39 @@ public class utils {
 		return data;
 	}
 	
-	public static void LoadData(ArrayList<String> dataToLoad){
+	public static ArrayList<String> getTableAttributes(Connection conn, String table) {
+		Statement statement = null;
+		try {
+			statement = conn.createStatement();
+		} catch (SQLException e2) {
+		}
+		ArrayList<String> data = new ArrayList<String>();
+		ResultSet res = null;
+		try {
+			if (null != statement) {
+				String query = "\"" + table + "\"";
+				res = statement.executeQuery(query);
+			}
+		} catch (SQLException e1) {
+		}
+		try {
+			if (res != null) {
+				while (res.next()) {
+					String rec = res.getString(1);
+					data.add(rec);
+				}
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return data;
+	}
+	
+	
+	/*public static void LoadData(ArrayList<String> dataToLoad){
 		Runnable op = new Operations(dataToLoad);
 		new Thread(op).start();
-	}
+	}*/
 
 }

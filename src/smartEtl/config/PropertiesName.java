@@ -18,6 +18,10 @@ public enum PropertiesName {
 	destPort,
 	destDB,
 	destUser,
-	destPassword
+	destPassword;
 	
+	static public PropertiesName getProperty(String property){
+		return PropertiesName.valueOf(property);
+	}
 }
+

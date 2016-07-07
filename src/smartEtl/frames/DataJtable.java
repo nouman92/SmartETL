@@ -14,18 +14,17 @@ import smartEtl.core.utils;
  *
  * @author furqan
  */
-public class sourceDataJtable extends javax.swing.JInternalFrame {
+public class DataJtable extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form sourceDataJtable
      */
-    public sourceDataJtable() {
+    public DataJtable() {
     	super("Tables", true,true, true, true);
     }
 
     public void populateData(){
-    	Connection conn = utils.getSourceConnection();
-    	ArrayList[][]  data = utils.listTable(conn , this.Schema , this.Table );
+    	ArrayList[][]  data = utils.listTable(this.conn , this.table  );
     	initComponents(data);
     }
     /**
@@ -77,17 +76,19 @@ public class sourceDataJtable extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void setTable(String table) {
+		this.table = table;
+	}
 
+	public void setConn(Connection conn) {
+		this.conn = conn;
+	}
+	
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private String Schema;
-    private String Table;
-	public void setSchema(String schema) {
-		Schema = schema;
-	}
-	public void setTable(String table) {
-		Table = table;
-	}
+    private Connection conn;
+    private String table;
+    
     // End of variables declaration//GEN-END:variables
 }

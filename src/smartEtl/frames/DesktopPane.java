@@ -6,6 +6,7 @@
 package smartEtl.frames;
 
 import java.awt.Color;
+import java.sql.Connection;
 
 import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
@@ -45,9 +46,9 @@ public class DesktopPane extends javax.swing.JFrame {
         fileMenue = new javax.swing.JMenu();
         srcConnectionMenue = new javax.swing.JMenuItem();
         destConnectionMenue = new javax.swing.JMenuItem();
-        extractMenue = new javax.swing.JMenuItem();
-        transformMenue = new javax.swing.JMenuItem();
-        LoadDataMenue = new javax.swing.JMenuItem();
+        ViewSourceDataMenue = new javax.swing.JMenuItem();
+        ETLProcessesMenue = new javax.swing.JMenuItem();
+        ViewDestinationDataMenue = new javax.swing.JMenuItem();
         exitMenue = new javax.swing.JMenuItem();
         aboutMenue = new javax.swing.JMenu();
         aboutetl = new javax.swing.JMenuItem();
@@ -72,29 +73,29 @@ public class DesktopPane extends javax.swing.JFrame {
         });
         fileMenue.add(destConnectionMenue);
 
-        extractMenue.setText("Extract Data");
-        extractMenue.addActionListener(new java.awt.event.ActionListener() {
+        ViewSourceDataMenue.setText("View Source Data");
+        ViewSourceDataMenue.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                extractMenueActionPerformed(evt);
+                ViewSourceDataMenueActionPerformed(evt);
             }
         });
-        fileMenue.add(extractMenue);
+        fileMenue.add(ViewSourceDataMenue);
 
-        transformMenue.setText("Transform");
-        transformMenue.addActionListener(new java.awt.event.ActionListener() {
+        ETLProcessesMenue.setText("ETL Processes");
+        ETLProcessesMenue.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                transformMenueActionPerformed(evt);
+                ETLProcessesMenueActionPerformed(evt);
             }
         });
-        fileMenue.add(transformMenue);
+        fileMenue.add(ETLProcessesMenue);
 
-        LoadDataMenue.setText("Load Data");
-        LoadDataMenue.addActionListener(new java.awt.event.ActionListener() {
+        ViewDestinationDataMenue.setText("View Destination Data");
+        ViewDestinationDataMenue.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                LoadDataMenueActionPerformed(evt);
+                ViewDestinationDataMenueActionPerformed(evt);
             }
         });
-        fileMenue.add(LoadDataMenue);
+        fileMenue.add(ViewDestinationDataMenue);
 
         exitMenue.setText("Exit");
         exitMenue.addActionListener(new java.awt.event.ActionListener() {
@@ -107,11 +108,6 @@ public class DesktopPane extends javax.swing.JFrame {
         mainMenue.add(fileMenue);
 
         aboutMenue.setText("About");
-        aboutMenue.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                aboutMenueActionPerformed(evt);
-            }
-        });
 
         aboutetl.setText("About-ETL");
         aboutetl.addActionListener(new java.awt.event.ActionListener() {
@@ -151,10 +147,6 @@ public class DesktopPane extends javax.swing.JFrame {
         desktopPane.add(dest);
     } 
     
-    private void aboutMenueActionPerformed(java.awt.event.ActionEvent evt) {                                                    
-       
-    }  
-
     private void srcConnectionMenueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_destConnectionMenueActionPerformed
         srcConnection srcCon = new srcConnection();
         srcCon.setLocation(100, 100);
@@ -169,10 +161,23 @@ public class DesktopPane extends javax.swing.JFrame {
         desktopPane.add(about);
     }//GEN-LAST:event_aboutetlActionPerformed
 
-    private void extractMenueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_extractMenueActionPerformed
+    private void ViewSourceDataMenueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewSourceDataMenueActionPerformed
+
+    	loadTablesFor("src");
     	
-    	if( utils.getSourceConnection() != null){
-	    	TablesList tables = new TablesList();
+    }//GEN-LAST:event_ViewSourceDataMenueActionPerformed
+
+    private void ViewDestinationDataMenueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewDestinationDataMenueActionPerformed
+    	
+    	loadTablesFor("dest");
+    	
+    }//GEN-LAST:event_ViewDestinationDataMenueActionPerformed
+
+    public void loadTablesFor(String dataFor){
+    	Connection conn = utils.getConnection(dataFor);
+    	if( conn != null){
+    		
+	    	TablesList tables = new TablesList(conn , dataFor);
 	    	tables.setLocation(100, 100);
 	    	tables.setVisible(true);
 	        desktopPane.add(tables);
@@ -180,24 +185,13 @@ public class DesktopPane extends javax.swing.JFrame {
     	else{
     		JOptionPane.showMessageDialog(null, "Please Enter Configurations First");
     	}
-    }//GEN-LAST:event_extractMenueActionPerformed
-
-    private void LoadDataMenueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoadDataMenueActionPerformed
-    	if( utils.getDestinationConnection() != null)
-    	{
-    		LoadDataDestination tables = new LoadDataDestination();
-	    	tables.populateData();
-	    	tables.setLocation(100, 100);
-	    	tables.setVisible(true);
-	        desktopPane.add(tables);
-    	}else{
-    		JOptionPane.showMessageDialog(null, "Please Enter Configurations First");
-    	}
-    }//GEN-LAST:event_LoadDataMenueActionPerformed
-
-    private void transformMenueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transformMenueActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_transformMenueActionPerformed
+    }
+    private void ETLProcessesMenueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ETLProcessesMenueActionPerformed
+    	Transformations tables = new Transformations();
+    	tables.setLocation(100, 100);
+    	tables.setVisible(true);
+        desktopPane.add(tables);
+    }//GEN-LAST:event_ETLProcessesMenueActionPerformed
 
     /**
      * @param args the command line arguments
@@ -205,15 +199,15 @@ public class DesktopPane extends javax.swing.JFrame {
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem LoadDataMenue;
+    private javax.swing.JMenuItem ETLProcessesMenue;
+    private javax.swing.JMenuItem ViewDestinationDataMenue;
+    private javax.swing.JMenuItem ViewSourceDataMenue;
     private javax.swing.JMenu aboutMenue;
     private javax.swing.JMenuItem aboutetl;
     private javax.swing.JMenuItem destConnectionMenue;
     private javax.swing.JMenuItem exitMenue;
-    private javax.swing.JMenuItem extractMenue;
     private javax.swing.JMenu fileMenue;
     private javax.swing.JMenuBar mainMenue;
     private javax.swing.JMenuItem srcConnectionMenue;
-    private javax.swing.JMenuItem transformMenue;
     // End of variables declaration//GEN-END:variables
 }

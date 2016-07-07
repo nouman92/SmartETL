@@ -5,6 +5,11 @@
  */
 package smartEtl.frames;
 
+import java.sql.Connection;
+import java.util.ArrayList;
+
+import smartEtl.core.utils;
+
 /**
  *
  * @author furqan
@@ -15,7 +20,18 @@ public class Transformations extends javax.swing.JInternalFrame {
      * Creates new form Transformations
      */
     public Transformations() {
-        initComponents();
+    	super("Tables", true,true, true, true);
+    ArrayList<String> tables = new ArrayList<String>();
+    	Connection conn = utils.getConnection("src");
+    	if(conn != null){
+        	tables = utils.getTables(conn);
+    	}
+    	String[] tablesList = new String[tables.size()];
+    	for( int i = 0 ; i < tables.size() ; i++){
+    		tablesList[i] = tables.get(i);
+    	}
+    	
+        initComponents(tablesList);
     }
 
     /**
@@ -25,14 +41,19 @@ public class Transformations extends javax.swing.JInternalFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents(String[] tablesList) {
 
         TablesList = new javax.swing.JComboBox<>();
         SelectTableButton = new javax.swing.JButton();
 
-        TablesList.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        TablesList.setModel(new javax.swing.DefaultComboBoxModel<>(tablesList));
 
         SelectTableButton.setText("Show");
+        SelectTableButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SelectTableButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -57,6 +78,11 @@ public class Transformations extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void SelectTableButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelectTableButtonActionPerformed
+    	Object table= TablesList.getSelectedItem();
+    	table.toString();
+    }//GEN-LAST:event_SelectTableButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

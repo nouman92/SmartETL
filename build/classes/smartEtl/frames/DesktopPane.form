@@ -25,28 +25,28 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="destConnectionMenueActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="extractMenue">
+            <MenuItem class="javax.swing.JMenuItem" name="ViewSourceDataMenue">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Extract Data"/>
+                <Property name="text" type="java.lang.String" value="View Source Data"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="extractMenueActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ViewSourceDataMenueActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="transformMenue">
+            <MenuItem class="javax.swing.JMenuItem" name="ETLProcessesMenue">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Transform"/>
+                <Property name="text" type="java.lang.String" value="ETL Processes"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="transformMenueActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ETLProcessesMenueActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="LoadDataMenue">
+            <MenuItem class="javax.swing.JMenuItem" name="ViewDestinationDataMenue">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Load Data"/>
+                <Property name="text" type="java.lang.String" value="View Destination Data"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="LoadDataMenueActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ViewDestinationDataMenueActionPerformed"/>
               </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="exitMenue">
@@ -63,9 +63,6 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="About"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="aboutMenueActionPerformed"/>
-          </Events>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="aboutetl">
               <Properties>

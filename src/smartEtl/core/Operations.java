@@ -24,19 +24,16 @@ public class Operations implements Runnable{
 
 	private Statement toStatement;
 	private Connection toConnection;
-	private ResultSet toResultSet;
+	//private ResultSet toResultSet;
 	
 	private String attrTo[];
     public String typeTo[];
     
     ArrayList<String> tables;
-    
-    private int percentage;
-	
+   
 	public void init(){
-		fromConnection = utils.getSourceConnectionWithDB();
-		toConnection = utils.getDestinationConnection();
-		percentage = 0;
+		fromConnection = utils.getConnection("src");
+		toConnection = utils.getConnection("dest");
 	}
 
 	public void CreateTables() {
@@ -68,9 +65,6 @@ public class Operations implements Runnable{
 	public void copyData() {
 		try{
 			for(String table : tables){
-				int size = tables.size();
-				int curent_index = tables.indexOf(table);
-				percentage = ( curent_index / size ) * 100;
 				String query = "select * from " + table;
 				fromStatement = fromConnection.createStatement();
 				fromResultSet = fromStatement.executeQuery(query);
@@ -122,12 +116,14 @@ public class Operations implements Runnable{
             System.out.println(e.toString());
           }
     }
+	
 	public void transform(int nColumn){
 		attrTo = new String[nColumn] ;
 		for(int lp=1;lp<=nColumn;lp++) {
 			attrTo[lp -1] = attrFrom[lp-1];
 		}
 	}
+	
 	public void load(int nColumn , String table) {
 	    String cmdinc;
 	   
@@ -176,10 +172,6 @@ public class Operations implements Runnable{
     
     public boolean isBoolean(int type) {
         return (type == java.sql.Types.BOOLEAN || type == java.sql.Types.TINYINT);
-	}
-
-	public int getPercentage() {
-		return percentage;
 	}
 
 	@Override

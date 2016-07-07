@@ -5,18 +5,12 @@
  */
 package smartEtl.frames;
 
-import java.awt.Button;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.sql.Connection;
 import java.util.ArrayList;
 
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.JTable;
-import javax.swing.ListSelectionModel;
 
 import smartEtl.config.Configuration;
 import smartEtl.config.PropertiesName;
@@ -31,18 +25,19 @@ public class TablesList extends javax.swing.JInternalFrame {
     /**
      * Creates new form TablesList
      */
-    public TablesList() {
+    public TablesList(Connection conn , String dataFor) {
     	super("Tables", true,true, true, true);
-    	String srcDataBase = Configuration.getAttribute(PropertiesName.srcDB);
+    	this.conn = conn;
+    	this.dataFor = dataFor;
+    	String srcDataBase = Configuration.getAttribute(PropertiesName.getProperty(dataFor+"DB"));
     	this.setTitle(srcDataBase+"-db");
-    	Object  obj[][] = LoadData(srcDataBase);
+    	Object  obj[][] = LoadData();
         initComponents(obj);
     }
     
-    private Object[][] LoadData(String srcDataBase){
+    private Object[][] LoadData(){
     	
-    	Connection conn = utils.getSourceConnection();
-    	ArrayList<String> tables = utils.getTables(conn, srcDataBase);
+    	ArrayList<String> tables = utils.getTables(conn);
     	Object  obj[][] = new Object[tables.size()][2];
     	for( int i = 0 ; i < tables.size() ; i++){
     		obj[i][0] = tables.get(i);
@@ -142,8 +137,8 @@ public class TablesList extends javax.swing.JInternalFrame {
     }
     
     public void getTableData(String table){
-    	sourceDataJtable tables = new sourceDataJtable();
-    	tables.setSchema(Configuration.getAttribute(PropertiesName.srcDB));
+    	DataJtable tables = new DataJtable();
+    	tables.setConn(this.conn);
     	tables.setTable(table);
     	tables.populateData();
     	tables.setTitle(table);
@@ -152,8 +147,14 @@ public class TablesList extends javax.swing.JInternalFrame {
     	getParent().add(tables);
     }
 
+	public void setConn(Connection conn) {
+		this.conn = conn;
+	}
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tablesList;
+    private Connection conn;
+    private String dataFor;
     // End of variables declaration//GEN-END:variables
 }
