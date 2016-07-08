@@ -3,28 +3,33 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package smartEtl.frames;
+package smartEtl.Screens;
 
 import java.sql.Connection;
 import java.util.ArrayList;
 
-import smartEtl.core.utils;
+import smartEtl.operations.DataBaseModule;
 
 /**
  *
  * @author furqan
  */
-public class DataJtable extends javax.swing.JInternalFrame {
+public class ShowTableData extends javax.swing.JInternalFrame {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	/**
      * Creates new form sourceDataJtable
      */
-    public DataJtable() {
+    public ShowTableData() {
     	super("Tables", true,true, true, true);
     }
 
     public void populateData(){
-    	ArrayList[][]  data = utils.listTable(this.conn , this.table  );
+    	@SuppressWarnings("rawtypes")
+		ArrayList[][]  data = DataBaseModule.listTable(this.conn , this.table  );
     	initComponents(data);
     }
     /**
@@ -34,7 +39,7 @@ public class DataJtable extends javax.swing.JInternalFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents(ArrayList[][]  source) {
+    private void initComponents(@SuppressWarnings("rawtypes") ArrayList[][]  source) {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();

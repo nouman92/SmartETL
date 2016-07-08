@@ -10,6 +10,24 @@
 <project name="SmartETL" default="default" basedir=".">
     <description>Builds, tests, and runs the project SmartETL.</description>
     <import file="nbproject/build-impl.xml"/>
+	<target name="-post-jar">
+	    <property name="store.jar.name" value="SmartETL"/>
+	    <property name="store.dir" value="dist"/>
+	    <property name="store.jar" value="${store.dir}/${store.jar.name}.jar"/>
+	    <echo message="Packaging ${application.title} into a single JAR at ${store.jar}"/>
+	    <jar destfile="${store.dir}/temp_final.jar" filesetmanifest="skip">
+	        <zipgroupfileset dir="dist" includes="*.jar"/>
+	    	<zipgroupfileset dir="lib" includes="*.jar"/>
+	        <manifest>
+	            <attribute name="Main-Class" value="${main.class}"/>
+	        </manifest>
+	    </jar>
+	    <zip destfile="${store.jar}">
+	        <zipfileset src="${store.dir}/temp_final.jar"
+	        excludes="META-INF/*.SF, META-INF/*.DSA, META-INF/*.RSA"/>
+	    </zip>
+	    <delete file="${store.dir}/temp_final.jar"/>
+	</target>
     <!--
 
     There exist several targets which are by default empty and which can be 
@@ -63,6 +81,7 @@
                 <arg file="${dist.jar}"/>
             </exec>
         </target>
+        
 
     Notice that the overridden target depends on the jar target and not only on 
     the compile target as the regular run target does. Again, for a list of available 

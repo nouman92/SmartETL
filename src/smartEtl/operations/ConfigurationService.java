@@ -1,4 +1,4 @@
-package smartEtl.config;
+package smartEtl.operations;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -7,7 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Properties;
 
-public class Configuration {
+public class ConfigurationService {
 
 	private static Properties projectProperties ;
 	private static String FileName; ;

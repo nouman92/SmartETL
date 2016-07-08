@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package smartEtl.frames;
+package smartEtl.Screens;
 
 import java.io.File;
 
@@ -12,18 +12,22 @@ import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import smartEtl.config.Configuration;
+import smartEtl.operations.ConfigurationService;
 
 /**
  *
  * @author furqan
  */
-public class mainWindow extends javax.swing.JFrame {
+public class SelectProject extends javax.swing.JFrame {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	/**
      * Creates new form mainWindow
      */
-    public mainWindow() {
+    public SelectProject() {
         initComponents();
     }
 
@@ -99,10 +103,10 @@ public class mainWindow extends javax.swing.JFrame {
     private void startButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startButtonActionPerformed
     	String project = this.projectName.getText();
     	if( projFile == null && !project.equals(""))
-         	Configuration.init(project);
+         	ConfigurationService.init(project);
     	 else if( projFile != null )
     	 {
-    		 if(!Configuration.init(projFile)){
+    		 if(!ConfigurationService.init(projFile)){
     			 JOptionPane.showMessageDialog(this, "Invalid File");
         		 return;
     		 }

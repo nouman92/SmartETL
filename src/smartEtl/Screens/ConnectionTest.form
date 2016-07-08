@@ -22,36 +22,36 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="destDBUrlLable" min="-2" pref="69" max="-2" attributes="0"/>
+                  <Component id="DBUrlLable" min="-2" pref="69" max="-2" attributes="0"/>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="destDBSaveButton" min="-2" pref="72" max="-2" attributes="0"/>
+                              <Component id="DBSaveButton" min="-2" pref="72" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="destDBTestButton" min="-2" pref="69" max="-2" attributes="0"/>
+                              <Component id="DBTestButton" min="-2" pref="69" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="destDBUserName" alignment="1" max="32767" attributes="0"/>
-                          <Component id="destDBUrl" alignment="1" max="32767" attributes="0"/>
-                          <Component id="destDB" alignment="1" max="32767" attributes="0"/>
-                          <Component id="destDataBase" max="32767" attributes="0"/>
-                          <Component id="destDBPort" alignment="0" max="32767" attributes="0"/>
-                          <Component id="destDBPassword" alignment="0" min="-2" pref="189" max="-2" attributes="0"/>
+                          <Component id="DBUserName" alignment="1" max="32767" attributes="0"/>
+                          <Component id="DBUrl" alignment="1" max="32767" attributes="0"/>
+                          <Component id="DB" alignment="1" max="32767" attributes="0"/>
+                          <Component id="DBSchema" max="32767" attributes="0"/>
+                          <Component id="DBPort" alignment="0" max="32767" attributes="0"/>
+                          <Component id="DBPassword" alignment="0" min="-2" pref="189" max="-2" attributes="0"/>
                       </Group>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                              <Component id="destDBlable" min="-2" pref="69" max="-2" attributes="0"/>
+                              <Component id="DBlable" min="-2" pref="69" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="destDBPortLable" min="-2" pref="69" max="-2" attributes="0"/>
+                              <Component id="DBPortLable" min="-2" pref="69" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="destDBUserNameLable" min="-2" max="-2" attributes="0"/>
-                                  <Component id="destDataBaseLable" min="-2" max="-2" attributes="0"/>
-                                  <Component id="destDBPasswordLable" alignment="0" min="-2" pref="69" max="-2" attributes="0"/>
+                                  <Component id="DBUserNameLable" min="-2" max="-2" attributes="0"/>
+                                  <Component id="DBSchemaLable" min="-2" max="-2" attributes="0"/>
+                                  <Component id="DBPasswordLable" alignment="0" min="-2" pref="69" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -66,38 +66,38 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="destDB" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="destDBlable" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="DB" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="DBlable" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="destDBUrl" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="destDBUrlLable" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="DBUrl" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="DBUrlLable" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="destDBPort" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="destDBPortLable" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="DBPort" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="DBPortLable" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="destDataBase" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="destDataBaseLable" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="DBSchema" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="DBSchemaLable" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="destDBUserName" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="destDBUserNameLable" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="DBUserName" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="DBUserNameLable" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="destDBPassword" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="destDBPasswordLable" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="DBPassword" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="DBPasswordLable" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="19" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="destDBSaveButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="destDBTestButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="DBSaveButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="DBTestButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
           </Group>
@@ -105,7 +105,7 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JComboBox" name="destDB">
+    <Component class="javax.swing.JComboBox" name="DB">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="4">
@@ -120,82 +120,82 @@
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JLabel" name="destDBlable">
+    <Component class="javax.swing.JLabel" name="DBlable">
       <Properties>
         <Property name="text" type="java.lang.String" value="Select DB"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="destDBUrl">
+    <Component class="javax.swing.JTextField" name="DBUrl">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="fe" green="fe" red="fe" type="rgb"/>
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="destDBUrlLable">
+    <Component class="javax.swing.JLabel" name="DBUrlLable">
       <Properties>
         <Property name="text" type="java.lang.String" value="DB URL"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="destDBPort">
+    <Component class="javax.swing.JTextField" name="DBPort">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="fe" green="fe" red="fe" type="rgb"/>
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="destDBPortLable">
+    <Component class="javax.swing.JLabel" name="DBPortLable">
       <Properties>
         <Property name="text" type="java.lang.String" value="Port"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="destDBUserName">
+    <Component class="javax.swing.JTextField" name="DBUserName">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="fe" green="fe" red="fe" type="rgb"/>
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="destDBUserNameLable">
+    <Component class="javax.swing.JLabel" name="DBUserNameLable">
       <Properties>
         <Property name="text" type="java.lang.String" value="User Name"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="destDBPassword">
+    <Component class="javax.swing.JTextField" name="DBPassword">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="fe" green="fe" red="fe" type="rgb"/>
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="destDBPasswordActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="DBPasswordActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="destDBPasswordLable">
+    <Component class="javax.swing.JLabel" name="DBPasswordLable">
       <Properties>
         <Property name="text" type="java.lang.String" value="Password"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="destDBSaveButton">
+    <Component class="javax.swing.JButton" name="DBSaveButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Save"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="destDBSaveButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="DBSaveButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="destDBTestButton">
+    <Component class="javax.swing.JButton" name="DBTestButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Test"/>
       </Properties>
       <Events>
-        <EventHandler event="inputMethodTextChanged" listener="java.awt.event.InputMethodListener" parameters="java.awt.event.InputMethodEvent" handler="destDBTestButtonInputMethodTextChanged"/>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="destDBTestButtonActionPerformed"/>
+        <EventHandler event="inputMethodTextChanged" listener="java.awt.event.InputMethodListener" parameters="java.awt.event.InputMethodEvent" handler="DBTestButtonInputMethodTextChanged"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="DBTestButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="destDataBase">
+    <Component class="javax.swing.JTextField" name="DBSchema">
     </Component>
-    <Component class="javax.swing.JLabel" name="destDataBaseLable">
+    <Component class="javax.swing.JLabel" name="DBSchemaLable">
       <Properties>
         <Property name="text" type="java.lang.String" value="DataBase"/>
       </Properties>

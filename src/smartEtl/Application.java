@@ -1,6 +1,6 @@
 package smartEtl;
 
-import smartEtl.frames.mainWindow;
+import smartEtl.Screens.SelectProject;
 
 public class Application {
 
@@ -14,13 +14,13 @@ public class Application {
 				}
 			}
 		} catch (Exception ex) {
-			java.util.logging.Logger.getLogger(mainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null,
+			java.util.logging.Logger.getLogger(SelectProject.class.getName()).log(java.util.logging.Level.SEVERE, null,
 					ex);
 		}
 
 		java.awt.EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				new mainWindow().setVisible(true);
+				new SelectProject().setVisible(true);
 			}
 		});
 

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package smartEtl.core;
+package smartEtl.operations;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -12,15 +12,13 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-
-import smartEtl.config.Configuration;
-import smartEtl.config.PropertiesName;
+import java.util.Properties;
 
 /**
  *
  * @author furqan
  */
-public class utils {
+public class DataBaseModule {
 
 	private static String dbURL[] = { 
 			"jdbc:mysql://", 
@@ -39,7 +37,11 @@ public class utils {
 		try {
 			Class.forName(strDriver[type]);
 			String connUrl = dbURL[type] + url + ":" + port;
-			Connection conn = DriverManager.getConnection(connUrl, username, password);
+			Properties props = new Properties();
+			props.setProperty("user", username);
+			props.setProperty("password", password);
+			DriverManager.setLoginTimeout(6);
+			Connection conn = DriverManager.getConnection(connUrl, props);
 			if (conn != null) {
 				Statement statement = conn.createStatement();
 				ResultSet res = statement.executeQuery("SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA where SCHEMA_NAME = \"" + database + "\"");
@@ -48,7 +50,8 @@ public class utils {
 				conn.close();
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
+			
 		}
 		return status;
 	}
@@ -69,12 +72,12 @@ public class utils {
 	}
 
 	public static Connection getConnection(String source) {
-		int index = utils.getDriverClassIndex(Configuration.getAttribute(PropertiesName.getProperty(source+"Driver")));
-		String DBUrl = Configuration.getAttribute(PropertiesName.getProperty(source+"Url"));
-		String DBPort = Configuration.getAttribute(PropertiesName.getProperty(source+"Port"));
-		String DBUserName = Configuration.getAttribute(PropertiesName.getProperty(source+"User"));
-		String DBPassword = Configuration.getAttribute(PropertiesName.getProperty(source+"Password"));
-		String DB = Configuration.getAttribute(PropertiesName.getProperty(source+"DB"));
+		int index = DataBaseModule.getDriverClassIndex(ConfigurationService.getAttribute(PropertiesName.getProperty(source+"Driver")));
+		String DBUrl = ConfigurationService.getAttribute(PropertiesName.getProperty(source+"Url"));
+		String DBPort = ConfigurationService.getAttribute(PropertiesName.getProperty(source+"Port"));
+		String DBUserName = ConfigurationService.getAttribute(PropertiesName.getProperty(source+"User"));
+		String DBPassword = ConfigurationService.getAttribute(PropertiesName.getProperty(source+"Password"));
+		String DB = ConfigurationService.getAttribute(PropertiesName.getProperty(source+"DB"));
 		
 		Connection conn = null;
 		try {
@@ -91,19 +94,19 @@ public class utils {
 	}
 	
 	public static boolean checkIfBothDbAreSame() {
-		int srcindex = utils.getDriverClassIndex(Configuration.getAttribute(PropertiesName.srcDriver));
-		String srcDBUrl = Configuration.getAttribute(PropertiesName.srcUrl);
-		String srcDBPort = Configuration.getAttribute(PropertiesName.srcPort);
-		String srcDBUserName = Configuration.getAttribute(PropertiesName.srcUser);
-		String srcDBPassword = Configuration.getAttribute(PropertiesName.srcPassword);
-		String srcDB= Configuration.getAttribute(PropertiesName.srcDB);
+		int srcindex = DataBaseModule.getDriverClassIndex(ConfigurationService.getAttribute(PropertiesName.srcDriver));
+		String srcDBUrl = ConfigurationService.getAttribute(PropertiesName.srcUrl);
+		String srcDBPort = ConfigurationService.getAttribute(PropertiesName.srcPort);
+		String srcDBUserName = ConfigurationService.getAttribute(PropertiesName.srcUser);
+		String srcDBPassword = ConfigurationService.getAttribute(PropertiesName.srcPassword);
+		String srcDB= ConfigurationService.getAttribute(PropertiesName.srcDB);
 		
-		int destindex = utils.getDriverClassIndex(Configuration.getAttribute(PropertiesName.destDriver));
-		String destDBUrl = Configuration.getAttribute(PropertiesName.destUrl);
-		String destDBPort = Configuration.getAttribute(PropertiesName.destPort);
-		String destDBUserName = Configuration.getAttribute(PropertiesName.destUser);
-		String destDBPassword = Configuration.getAttribute(PropertiesName.destPassword);
-		String destDB = Configuration.getAttribute(PropertiesName.destDB);
+		int destindex = DataBaseModule.getDriverClassIndex(ConfigurationService.getAttribute(PropertiesName.destDriver));
+		String destDBUrl = ConfigurationService.getAttribute(PropertiesName.destUrl);
+		String destDBPort = ConfigurationService.getAttribute(PropertiesName.destPort);
+		String destDBUserName = ConfigurationService.getAttribute(PropertiesName.destUser);
+		String destDBPassword = ConfigurationService.getAttribute(PropertiesName.destPassword);
+		String destDB = ConfigurationService.getAttribute(PropertiesName.destDB);
 		
 		if( srcindex == destindex && 
 				srcDBUrl.equals(destDBUrl) &&
@@ -201,7 +204,7 @@ public class utils {
 		ResultSet res = null;
 		try {
 			if (null != statement) {
-				String query = "\"" + table + "\"";
+				String query = "DESCRIBE " + table ;
 				res = statement.executeQuery(query);
 			}
 		} catch (SQLException e1) {
@@ -219,11 +222,5 @@ public class utils {
 		}
 		return data;
 	}
-	
-	
-	/*public static void LoadData(ArrayList<String> dataToLoad){
-		Runnable op = new Operations(dataToLoad);
-		new Thread(op).start();
-	}*/
 
 }

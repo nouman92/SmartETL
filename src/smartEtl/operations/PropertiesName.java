@@ -1,4 +1,4 @@
-package smartEtl.config;
+package smartEtl.operations;
 
 public enum PropertiesName {
 	
